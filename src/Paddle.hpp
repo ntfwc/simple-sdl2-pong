@@ -14,6 +14,9 @@ class Paddle
 		SDL_Rect* getRect();
 
 		void draw(SDL_Renderer* renderer);
+
+		void inputMoveUp();
+		void inputMoveDown(int windowHeight);
 	private:
 		SDL_Rect rect;
 };

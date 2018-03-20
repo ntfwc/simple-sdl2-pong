@@ -19,6 +19,13 @@ void mainLoop(SDL_Renderer* renderer)
 			{
 				running = false;
 			}
+			else if (e.type == SDL_KEYDOWN)
+			{
+				if (e.key.keysym.sym == SDLK_UP)
+					paddle1.inputMoveUp();
+				else if (e.key.keysym.sym == SDLK_DOWN)
+					paddle1.inputMoveDown(WINDOW_HEIGHT);
+			}
 		}
 		
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
