@@ -3,10 +3,11 @@
 
 #include "SdlSession.hpp"
 #include "SdlWindow.hpp"
+#include "Paddle.hpp"
 
 void mainLoop(SDL_Renderer* renderer)
 {
-	const SDL_Rect rect = {100, 100, 100, 100};
+	Paddle paddle1(20, 100);
 
 	bool running = true;
 	SDL_Event e;
@@ -23,8 +24,7 @@ void mainLoop(SDL_Renderer* renderer)
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 		SDL_RenderClear(renderer);
 
-		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-		SDL_RenderFillRect(renderer, &rect);
+		paddle1.draw(renderer);
 
 		SDL_RenderPresent(renderer);
 		SDL_Delay(100);
