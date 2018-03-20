@@ -12,3 +12,8 @@ SdlWindow::~SdlWindow()
 	if (this->window != nullptr)
 		SDL_DestroyWindow(this->window);
 }
+
+SDL_Window* SdlWindow::getWindow()
+{
+	return this->window;
+}
