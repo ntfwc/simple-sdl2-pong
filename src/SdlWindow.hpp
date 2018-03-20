@@ -12,6 +12,8 @@ class SdlWindow
 		~SdlWindow();
 		bool init(const char* title);
 		SDL_Window* getWindow();
+		SDL_Renderer* getRenderer();
 	private:
 		SDL_Window* window;
+		SDL_Renderer* renderer;
 };
