@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <SDL.h>
 
+#include "SdlSession.hpp"
+
 int main()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	SdlSession session;
+	if (!session.init())
 		return 1;
 	printf("Hello, World!\n");
-	SDL_Quit();
 	return 0;
 }
