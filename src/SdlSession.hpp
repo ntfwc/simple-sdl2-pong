@@ -7,4 +7,5 @@ class SdlSession
 		bool init();
 	private:
 		bool initialized;
+		bool ttfInitialized;
 };
