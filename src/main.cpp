@@ -18,9 +18,9 @@ void mainLoop(SDL_Renderer* renderer, TTF_Font* font)
 	Paddle paddle1(20, paddleStartY);
 	Paddle paddle2(WINDOW_WIDTH - (20 + PADDLE_WIDTH), paddleStartY);
 
-	Ball ball;
 	Score player1Score(WINDOW_WIDTH/2 - 100, 20);
 	Score player2Score(WINDOW_WIDTH/2 + 100, 20);
+	Ball ball(&player1Score, &player2Score);
 
 	const int centerX = WINDOW_WIDTH / 2;
 

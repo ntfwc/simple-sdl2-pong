@@ -4,14 +4,17 @@
 const int BALL_SIZE = 10;
 const int MAX_Y = WINDOW_HEIGHT - BALL_SIZE;
 
-Ball::Ball()
+Ball::Ball(Score* player1Score, Score* player2Score)
 {
-	rect.x = WINDOW_WIDTH / 2 - BALL_SIZE / 2;
-	rect.y = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
-	rect.w = BALL_SIZE;
-	rect.h = BALL_SIZE;
-	xVel = 0;
-	yVel = -3;
+	this->rect.x = WINDOW_WIDTH / 2 - BALL_SIZE / 2;
+	this->rect.y = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
+	this->rect.w = BALL_SIZE;
+	this->rect.h = BALL_SIZE;
+	this->xVel = 0;
+	this->yVel = -3;
+
+	this->player1Score = player1Score;
+	this->player2Score = player2Score;
 }
 
 void Ball::run()
