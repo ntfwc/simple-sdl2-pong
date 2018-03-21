@@ -5,6 +5,7 @@
 #include "SdlWindow.hpp"
 #include "Paddle.hpp"
 #include "InputManager.hpp"
+#include "Ball.hpp"
 
 void mainLoop(SDL_Renderer* renderer)
 {
@@ -12,6 +13,8 @@ void mainLoop(SDL_Renderer* renderer)
 	const int paddleStartY = WINDOW_HEIGHT / 2 - PADDLE_HEIGHT / 2;
 	Paddle paddle1(20, paddleStartY);
 	Paddle paddle2(WINDOW_WIDTH - (20 + PADDLE_WIDTH), paddleStartY);
+
+	Ball ball;
 
 	const int centerX = WINDOW_WIDTH / 2;
 
@@ -50,6 +53,7 @@ void mainLoop(SDL_Renderer* renderer)
 
 		paddle1.draw(renderer);
 		paddle2.draw(renderer);
+		ball.draw(renderer);
 
 		//Draw center dividing dotted line
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
