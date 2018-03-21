@@ -13,6 +13,8 @@ void mainLoop(SDL_Renderer* renderer)
 	Paddle paddle1(20, paddleStartY);
 	Paddle paddle2(WINDOW_WIDTH - (20 + PADDLE_WIDTH), paddleStartY);
 
+	const int centerX = WINDOW_WIDTH / 2;
+
 	bool running = true;
 	SDL_Event e;
 	while (running)
@@ -48,6 +50,13 @@ void mainLoop(SDL_Renderer* renderer)
 
 		paddle1.draw(renderer);
 		paddle2.draw(renderer);
+
+		//Draw center dividing dotted line
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		for (int i = 0; i < WINDOW_HEIGHT; i += 4)
+		{
+			SDL_RenderDrawPoint(renderer, centerX, i);
+		}
 
 		SDL_RenderPresent(renderer);
 		SDL_Delay(100);
