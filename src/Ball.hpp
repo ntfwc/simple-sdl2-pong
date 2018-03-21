@@ -10,4 +10,6 @@ class Ball
 		void draw(SDL_Renderer*);
 	private:
 		SDL_Rect rect;
+		int xVel;
+		int yVel;
 };

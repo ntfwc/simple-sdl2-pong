@@ -9,11 +9,18 @@ Ball::Ball()
 	rect.y = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
 	rect.w = BALL_SIZE;
 	rect.h = BALL_SIZE;
+	xVel = 0;
+	yVel = -3;
 }
 
 void Ball::run()
 {
-	//Do nothing for now
+	this->rect.y += this->yVel;
+	if (this->rect.y < 0)
+	{
+		this->rect.y = -this->rect.y;
+		this->yVel = -this->yVel;
+	}
 }
 
 void Ball::draw(SDL_Renderer* renderer)

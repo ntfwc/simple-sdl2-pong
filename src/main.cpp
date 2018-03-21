@@ -49,6 +49,8 @@ void mainLoop(SDL_Renderer* renderer)
 				paddle2.inputMoveDown();
 		if (inputManager.isButtonDown(GameInputButton::PLAYER2_UP))
 				paddle2.inputMoveUp();
+
+		ball.run();
 		
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 		SDL_RenderClear(renderer);
