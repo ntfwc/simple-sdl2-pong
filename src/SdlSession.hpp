@@ -3,6 +3,7 @@
 class SdlSession
 {
 	public:
+		SdlSession();
 		~SdlSession();
 		bool init();
 	private:

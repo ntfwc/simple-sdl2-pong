@@ -4,6 +4,12 @@
 
 #include "SdlSession.hpp"
 
+SdlSession::SdlSession()
+{
+	this->initialized = false;
+	this->ttfInitialized = false;
+}
+
 SdlSession::~SdlSession()
 {
 	if (this->ttfInitialized)
