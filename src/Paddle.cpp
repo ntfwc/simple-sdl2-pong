@@ -1,8 +1,5 @@
 #include "Paddle.hpp"
 
-const int PADDLE_HEIGHT = 40;
-const int PADDLE_WIDTH = 10;
-
 Paddle::Paddle(int x, int y)
 {
 	rect.x = x;

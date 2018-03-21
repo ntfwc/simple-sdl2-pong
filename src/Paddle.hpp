@@ -2,6 +2,9 @@
 
 #include <SDL.h>
 
+const int PADDLE_HEIGHT = 40;
+const int PADDLE_WIDTH = 10;
+
 class Paddle
 {
 	public:

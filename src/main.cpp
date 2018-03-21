@@ -9,7 +9,9 @@
 void mainLoop(SDL_Renderer* renderer)
 {
 	InputManager inputManager;
-	Paddle paddle1(20, 100);
+	const int paddleStartY = WINDOW_HEIGHT / 2 - PADDLE_HEIGHT / 2;
+	Paddle paddle1(20, paddleStartY);
+	Paddle paddle2(WINDOW_WIDTH - (20 + PADDLE_WIDTH), paddleStartY);
 
 	bool running = true;
 	SDL_Event e;
@@ -35,11 +37,17 @@ void mainLoop(SDL_Renderer* renderer)
 				paddle1.inputMoveDown(WINDOW_HEIGHT);
 		if (inputManager.isButtonDown(GameInputButton::PLAYER1_UP))
 				paddle1.inputMoveUp();
+
+		if (inputManager.isButtonDown(GameInputButton::PLAYER2_DOWN))
+				paddle2.inputMoveDown(WINDOW_HEIGHT);
+		if (inputManager.isButtonDown(GameInputButton::PLAYER2_UP))
+				paddle2.inputMoveUp();
 		
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 		SDL_RenderClear(renderer);
 
 		paddle1.draw(renderer);
+		paddle2.draw(renderer);
 
 		SDL_RenderPresent(renderer);
 		SDL_Delay(100);
