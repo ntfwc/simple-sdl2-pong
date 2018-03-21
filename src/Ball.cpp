@@ -2,6 +2,7 @@
 #include "SdlWindow.hpp"
 
 const int BALL_SIZE = 10;
+const int MAX_Y = WINDOW_HEIGHT - BALL_SIZE;
 
 Ball::Ball()
 {
@@ -19,6 +20,11 @@ void Ball::run()
 	if (this->rect.y < 0)
 	{
 		this->rect.y = -this->rect.y;
+		this->yVel = -this->yVel;
+	}
+	else if (this->rect.y >= MAX_Y)
+	{
+		this->rect.y -= (this->rect.y - MAX_Y) * 2;
 		this->yVel = -this->yVel;
 	}
 }
