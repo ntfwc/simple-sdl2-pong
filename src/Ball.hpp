@@ -16,4 +16,6 @@ class Ball
 		int yVel;
 		Score* player1Score;
 		Score* player2Score;
+
+		void resetPosition();
 };
