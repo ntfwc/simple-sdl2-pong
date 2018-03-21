@@ -18,5 +18,5 @@ ENDIF()
 include_directories(${SDL2_TTF_INCLUDE_DIRS})
 
 set(GAME_EXE pong)
-add_executable(${GAME_EXE} src/main.cpp src/SdlSession.cpp src/SdlWindow.cpp src/Paddle.cpp src/InputManager.cpp src/Ball.cpp)
+add_executable(${GAME_EXE} src/main.cpp src/SdlSession.cpp src/SdlWindow.cpp src/Paddle.cpp src/InputManager.cpp src/Ball.cpp src/Score.cpp)
 target_link_libraries(${GAME_EXE} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})

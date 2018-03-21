@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #include "SdlSession.hpp"
 #include "SdlWindow.hpp"
 #include "Paddle.hpp"
 #include "InputManager.hpp"
 #include "Ball.hpp"
+#include "Score.hpp"
 
 const int TARGET_FPS = 60;
 
-void mainLoop(SDL_Renderer* renderer)
+void mainLoop(SDL_Renderer* renderer, TTF_Font* font)
 {
 	InputManager inputManager;
 	const int paddleStartY = WINDOW_HEIGHT / 2 - PADDLE_HEIGHT / 2;
@@ -17,6 +19,8 @@ void mainLoop(SDL_Renderer* renderer)
 	Paddle paddle2(WINDOW_WIDTH - (20 + PADDLE_WIDTH), paddleStartY);
 
 	Ball ball;
+	Score player1Score(WINDOW_WIDTH/2 - 100, 20);
+	Score player2Score(WINDOW_WIDTH/2 + 100, 20);
 
 	const int centerX = WINDOW_WIDTH / 2;
 
@@ -58,6 +62,8 @@ void mainLoop(SDL_Renderer* renderer)
 		paddle1.draw(renderer);
 		paddle2.draw(renderer);
 		ball.draw(renderer);
+		player1Score.draw(font, renderer);
+		player2Score.draw(font, renderer);
 
 		//Draw center dividing dotted line
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -79,6 +85,10 @@ int main()
 	SdlWindow window;
 	if (!window.init("Pong"))
 		return 2;
-	mainLoop(window.getRenderer());
+	TTF_Font* font;
+	if ((font = TTF_OpenFont("res/ttf-bitstream-vera-1.10/VeraMono.ttf", 16)) == nullptr)
+		return 3;
+	mainLoop(window.getRenderer(), font);
+	TTF_CloseFont(font);
 	return 0;
 }
