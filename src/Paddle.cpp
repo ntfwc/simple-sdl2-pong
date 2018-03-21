@@ -1,4 +1,5 @@
 #include "Paddle.hpp"
+#include "SdlWindow.hpp"
 
 Paddle::Paddle(int x, int y)
 {
@@ -26,9 +27,9 @@ void Paddle::inputMoveUp()
 		this->rect.y = 0;
 }
 
-void Paddle::inputMoveDown(int windowHeight)
+void Paddle::inputMoveDown()
 {
 	this->rect.y += 2;
-	if (this->rect.y + this->rect.h > windowHeight)
-		this->rect.y = windowHeight - this->rect.h;
+	if (this->rect.y + this->rect.h > WINDOW_HEIGHT)
+		this->rect.y = WINDOW_HEIGHT - this->rect.h;
 }

@@ -19,7 +19,7 @@ class Paddle
 		void draw(SDL_Renderer* renderer);
 
 		void inputMoveUp();
-		void inputMoveDown(int windowHeight);
+		void inputMoveDown();
 	private:
 		SDL_Rect rect;
 };

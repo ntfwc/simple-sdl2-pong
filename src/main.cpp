@@ -39,12 +39,12 @@ void mainLoop(SDL_Renderer* renderer)
 		}
 
 		if (inputManager.isButtonDown(GameInputButton::PLAYER1_DOWN))
-				paddle1.inputMoveDown(WINDOW_HEIGHT);
+				paddle1.inputMoveDown();
 		if (inputManager.isButtonDown(GameInputButton::PLAYER1_UP))
 				paddle1.inputMoveUp();
 
 		if (inputManager.isButtonDown(GameInputButton::PLAYER2_DOWN))
-				paddle2.inputMoveDown(WINDOW_HEIGHT);
+				paddle2.inputMoveDown();
 		if (inputManager.isButtonDown(GameInputButton::PLAYER2_UP))
 				paddle2.inputMoveUp();
 		
