@@ -1,7 +1,7 @@
 #include "Paddle.hpp"
 #include "SdlWindow.hpp"
 
-const int PADDLE_SPEED = 2;
+const int PADDLE_SPEED = 4;
 
 Paddle::Paddle(int x, int y)
 {
