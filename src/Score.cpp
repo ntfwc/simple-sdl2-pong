@@ -29,3 +29,8 @@ void Score::draw(TTF_Font* font, SDL_Renderer* renderer)
 	}
 	SDL_FreeSurface(surface);
 }
+
+void Score::increment()
+{
+	this->value++;
+}

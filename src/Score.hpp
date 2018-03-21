@@ -12,6 +12,7 @@ class Score
 		 */
 		Score(int x, int y);
 		void draw(TTF_Font*, SDL_Renderer*);
+		void increment();
 	private:
 		int x;
 		int y;
