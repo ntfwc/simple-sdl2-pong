@@ -7,6 +7,8 @@
 #include "InputManager.hpp"
 #include "Ball.hpp"
 
+const int TARGET_FPS = 60;
+
 void mainLoop(SDL_Renderer* renderer)
 {
 	InputManager inputManager;
@@ -63,7 +65,7 @@ void mainLoop(SDL_Renderer* renderer)
 		}
 
 		SDL_RenderPresent(renderer);
-		SDL_Delay(100);
+		SDL_Delay(1000 / TARGET_FPS);
 	}
 }
 
