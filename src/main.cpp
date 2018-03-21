@@ -4,9 +4,11 @@
 #include "SdlSession.hpp"
 #include "SdlWindow.hpp"
 #include "Paddle.hpp"
+#include "InputManager.hpp"
 
 void mainLoop(SDL_Renderer* renderer)
 {
+	InputManager inputManager;
 	Paddle paddle1(20, 100);
 
 	bool running = true;
@@ -21,12 +23,18 @@ void mainLoop(SDL_Renderer* renderer)
 			}
 			else if (e.type == SDL_KEYDOWN)
 			{
-				if (e.key.keysym.sym == SDLK_UP)
-					paddle1.inputMoveUp();
-				else if (e.key.keysym.sym == SDLK_DOWN)
-					paddle1.inputMoveDown(WINDOW_HEIGHT);
+				inputManager.handleKeyDown(e.key.keysym.sym);
+			}
+			else if (e.type == SDL_KEYUP)
+			{
+				inputManager.handleKeyUp(e.key.keysym.sym);
 			}
 		}
+
+		if (inputManager.isButtonDown(GameInputButton::PLAYER1_DOWN))
+				paddle1.inputMoveDown(WINDOW_HEIGHT);
+		if (inputManager.isButtonDown(GameInputButton::PLAYER1_UP))
+				paddle1.inputMoveUp();
 		
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 		SDL_RenderClear(renderer);
