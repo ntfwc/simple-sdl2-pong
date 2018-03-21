@@ -1,6 +1,8 @@
 #include "Paddle.hpp"
 #include "SdlWindow.hpp"
 
+const int PADDLE_SPEED = 2;
+
 Paddle::Paddle(int x, int y)
 {
 	rect.x = x;
@@ -22,14 +24,14 @@ void Paddle::draw(SDL_Renderer* renderer)
 
 void Paddle::inputMoveUp()
 {
-	this->rect.y -= 2;
+	this->rect.y -= PADDLE_SPEED;
 	if (this->rect.y < 0)
 		this->rect.y = 0;
 }
 
 void Paddle::inputMoveDown()
 {
-	this->rect.y += 2;
+	this->rect.y += PADDLE_SPEED;
 	if (this->rect.y + this->rect.h > WINDOW_HEIGHT)
 		this->rect.y = WINDOW_HEIGHT - this->rect.h;
 }
