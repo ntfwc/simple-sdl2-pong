@@ -20,7 +20,7 @@ void mainLoop(SDL_Renderer* renderer, TTF_Font* font)
 
 	Score player1Score(WINDOW_WIDTH/2 - 100, 20);
 	Score player2Score(WINDOW_WIDTH/2 + 100, 20);
-	Ball ball(&player1Score, &player2Score);
+	Ball ball(&player1Score, &player2Score, &paddle1, &paddle2);
 
 	const int centerX = WINDOW_WIDTH / 2;
 

@@ -8,7 +8,7 @@ const int MAX_Y = WINDOW_HEIGHT - BALL_SIZE;
 const int START_POSX = WINDOW_WIDTH / 2 - BALL_SIZE / 2;
 const int START_POSY = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
 
-Ball::Ball(Score* player1Score, Score* player2Score)
+Ball::Ball(Score* player1Score, Score* player2Score, Paddle* paddle1, Paddle* paddle2)
 {
 	resetPosition();
 	this->rect.w = BALL_SIZE;
@@ -18,6 +18,9 @@ Ball::Ball(Score* player1Score, Score* player2Score)
 
 	this->player1Score = player1Score;
 	this->player2Score = player2Score;
+
+	this->paddle1 = paddle1;
+	this->paddle2 = paddle2;
 }
 
 void Ball::run()
