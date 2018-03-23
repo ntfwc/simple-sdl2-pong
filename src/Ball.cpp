@@ -8,12 +8,15 @@ const int MAX_Y = WINDOW_HEIGHT - BALL_SIZE;
 const int START_POSX = WINDOW_WIDTH / 2 - BALL_SIZE / 2;
 const int START_POSY = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
 
+const int STARTING_X_SPEED = 3;
+const int MAX_X_SPEED = 7;
+
 Ball::Ball(Score* player1Score, Score* player2Score, Paddle* paddle1, Paddle* paddle2)
 {
 	resetPosition();
 	this->rect.w = BALL_SIZE;
 	this->rect.h = BALL_SIZE;
-	this->xVel = -3;
+	this->xVel = -STARTING_X_SPEED;
 	this->yVel = -3;
 
 	this->player1Score = player1Score;
@@ -76,6 +79,8 @@ void Ball::resetPosition()
 {
 	this->rect.x = START_POSX;
 	this->rect.y = START_POSY;
+
+	this->xVel = this->xVel > 0 ? STARTING_X_SPEED : -STARTING_X_SPEED;
 }
 
 void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
@@ -85,5 +90,10 @@ void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
 	SDL_IntersectRect(paddleRect, &this->rect, &intersection);
 	int correctionMult = isLeft ? 1 : -1;
 	this->rect.x += correctionMult * intersection.w * 2;
-	this->xVel = -this->xVel;
+
+	this->xVel = -(this->xVel + (this->xVel > 0 ? 1 : -1));
+	if (this->xVel > MAX_X_SPEED)
+		this->xVel = MAX_X_SPEED;
+	else if (this->xVel < -MAX_X_SPEED)
+		this->xVel = -MAX_X_SPEED;
 }
