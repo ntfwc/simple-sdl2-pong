@@ -50,6 +50,20 @@ void Ball::run()
 		this->xVel = -this->xVel;
 		this->player1Score->increment();
 	}
+
+	const SDL_Rect* paddle1Rect = this->paddle1->getRect();
+	if (SDL_HasIntersection(&this->rect, this->paddle1->getRect()))
+	{
+		handlePaddleCollision(paddle1Rect, true);
+	}
+	else
+	{
+		const SDL_Rect* paddle2Rect = this->paddle2->getRect();
+		if (SDL_HasIntersection(&this->rect, paddle2Rect))
+		{
+			handlePaddleCollision(paddle2Rect, false);
+		}
+	}
 }
 
 void Ball::draw(SDL_Renderer* renderer)
@@ -62,4 +76,14 @@ void Ball::resetPosition()
 {
 	this->rect.x = START_POSX;
 	this->rect.y = START_POSY;
+}
+
+void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
+{
+	//For now lets just reverse, boring I know
+	SDL_Rect intersection;
+	SDL_IntersectRect(paddleRect, &this->rect, &intersection);
+	int correctionMult = isLeft ? 1 : -1;
+	this->rect.x += correctionMult * intersection.w * 2;
+	this->xVel = -this->xVel;
 }

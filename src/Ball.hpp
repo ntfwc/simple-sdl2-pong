@@ -21,4 +21,5 @@ class Ball
 		Paddle* paddle2;
 
 		void resetPosition();
+		void handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft);
 };
