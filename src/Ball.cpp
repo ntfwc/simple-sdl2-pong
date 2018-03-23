@@ -48,12 +48,14 @@ void Ball::run()
 	{
 		resetPosition();
 		setXVel(-this->xVel);
+		resetVelocities();
 		this->player2Score->increment();
 	}
 	else if (this->rect.x >= MAX_X)
 	{
 		resetPosition();
 		setXVel(-this->xVel);
+		resetVelocities();
 		this->player1Score->increment();
 	}
 
@@ -82,7 +84,10 @@ void Ball::resetPosition()
 {
 	this->rect.x = START_POSX;
 	this->rect.y = START_POSY;
+}
 
+void Ball::resetVelocities()
+{
 	this->xVel = this->xVel > 0 ? STARTING_X_SPEED : -STARTING_X_SPEED;
 	this->yVel = this->yVel > 0 ? STARTING_Y_SPEED : -STARTING_Y_SPEED;
 }
