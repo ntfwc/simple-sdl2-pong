@@ -35,25 +35,25 @@ void Ball::run()
 	if (this->rect.y < 0)
 	{
 		this->rect.y = -this->rect.y;
-		this->yVel = -this->yVel;
+		setYVel(-this->yVel);
 	}
 	else if (this->rect.y >= MAX_Y)
 	{
 		this->rect.y -= (this->rect.y - MAX_Y) * 2;
-		this->yVel = -this->yVel;
+		setYVel(-this->yVel);
 	}
 
 	this->rect.x += this->xVel;
 	if (this->rect.x < 0)
 	{
 		resetPosition();
-		this->xVel = -this->xVel;
+		setXVel(-this->xVel);
 		this->player2Score->increment();
 	}
 	else if (this->rect.x >= MAX_X)
 	{
 		resetPosition();
-		this->xVel = -this->xVel;
+		setXVel(-this->xVel);
 		this->player1Score->increment();
 	}
 
@@ -94,16 +94,25 @@ void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
 	int correctionMult = isLeft ? 1 : -1;
 	this->rect.x += correctionMult * intersection.w * 2;
 
-	this->xVel = -(this->xVel + (this->xVel > 0 ? 1 : -1));
+	setXVel(-(this->xVel + (this->xVel > 0 ? 1 : -1)));
+
+	int impactCenterY = intersection.y + intersection.h / 2;
+	int paddleCenterY = paddleRect->y + paddleRect->h / 2;
+	setYVel((impactCenterY - paddleCenterY) * MAX_Y_SPEED / (PADDLE_HEIGHT/2));
+}
+
+void Ball::setXVel(const int xVel)
+{
+	this->xVel = xVel;
 	if (this->xVel > MAX_X_SPEED)
 		this->xVel = MAX_X_SPEED;
 	else if (this->xVel < -MAX_X_SPEED)
 		this->xVel = -MAX_X_SPEED;
+}
 
-	int impactCenterY = intersection.y + intersection.h / 2;
-	int paddleCenterY = paddleRect->y + paddleRect->h / 2;
-	this->yVel = (impactCenterY - paddleCenterY) * MAX_Y_SPEED / (PADDLE_HEIGHT/2);
-
+void Ball::setYVel(const int yVel)
+{
+	this->yVel = yVel;
 	if (this->yVel > MAX_Y_SPEED)
 		this->yVel = MAX_Y_SPEED;
 	else if (this->yVel < -MAX_Y_SPEED)
