@@ -9,7 +9,10 @@ const int START_POSX = WINDOW_WIDTH / 2 - BALL_SIZE / 2;
 const int START_POSY = WINDOW_HEIGHT / 2 - BALL_SIZE / 2;
 
 const int STARTING_X_SPEED = 3;
+const int STARTING_Y_SPEED = 3;
+
 const int MAX_X_SPEED = 7;
+const int MAX_Y_SPEED = 4;
 
 Ball::Ball(Score* player1Score, Score* player2Score, Paddle* paddle1, Paddle* paddle2)
 {
@@ -17,7 +20,7 @@ Ball::Ball(Score* player1Score, Score* player2Score, Paddle* paddle1, Paddle* pa
 	this->rect.w = BALL_SIZE;
 	this->rect.h = BALL_SIZE;
 	this->xVel = -STARTING_X_SPEED;
-	this->yVel = -3;
+	this->yVel = -STARTING_Y_SPEED;
 
 	this->player1Score = player1Score;
 	this->player2Score = player2Score;
@@ -81,11 +84,11 @@ void Ball::resetPosition()
 	this->rect.y = START_POSY;
 
 	this->xVel = this->xVel > 0 ? STARTING_X_SPEED : -STARTING_X_SPEED;
+	this->yVel = this->yVel > 0 ? STARTING_Y_SPEED : -STARTING_Y_SPEED;
 }
 
 void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
 {
-	//For now lets just reverse, boring I know
 	SDL_Rect intersection;
 	SDL_IntersectRect(paddleRect, &this->rect, &intersection);
 	int correctionMult = isLeft ? 1 : -1;
@@ -96,4 +99,13 @@ void Ball::handlePaddleCollision(const SDL_Rect* paddleRect, bool isLeft)
 		this->xVel = MAX_X_SPEED;
 	else if (this->xVel < -MAX_X_SPEED)
 		this->xVel = -MAX_X_SPEED;
+
+	int impactCenterY = intersection.y + intersection.h / 2;
+	int paddleCenterY = paddleRect->y + paddleRect->h / 2;
+	this->yVel = (impactCenterY - paddleCenterY) * MAX_Y_SPEED / (PADDLE_HEIGHT/2);
+
+	if (this->yVel > MAX_Y_SPEED)
+		this->yVel = MAX_Y_SPEED;
+	else if (this->yVel < -MAX_Y_SPEED)
+		this->yVel = -MAX_Y_SPEED;
 }
