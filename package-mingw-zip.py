@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import zipfile
+import os
 
 MINGW_C_DLL_DIR="/usr/lib/gcc/x86_64-w64-mingw32/5.3-win32"
 MINGW_SDL2_DLL_DIR="/usr/local/custom/mingw/SDL2/x86_64-w64-mingw32/bin"
@@ -14,6 +15,12 @@ OUT_FILE="/tmp/pong.zip"
 def add(f, filePath, relative_arcname):
     f.write(filePath, arcname="pong/" + relative_arcname)
 
+def addDir(f, dirPath):
+    for root, dirs, files in os.walk(dirPath):
+        for aFile in files:
+            filePath = os.path.join(root, aFile);
+            add(f, filePath, filePath)
+
 def addDlls(f, dllPath, dllList):
     for dll in dllList:
         add(f, dllPath + "/" + dll, dll)
@@ -21,7 +28,7 @@ def addDlls(f, dllPath, dllList):
 def main():
     with zipfile.ZipFile(OUT_FILE, 'w', compression=zipfile.ZIP_DEFLATED) as f:
         add(f, "build-mingw/pong.exe", "pong.exe")
-        add(f, "res", "res")
+        addDir(f, "res")
         addDlls(f, MINGW_C_DLL_DIR, MINGW_C_DLLS)
         addDlls(f, MINGW_SDL2_DLL_DIR, MINGW_SDL2_DLLS)
         addDlls(f, MINGW_SDL2_TTF_DLL_DIR, MINGW_SDL2_TTF_DLLS)
