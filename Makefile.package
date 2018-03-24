@@ -4,6 +4,8 @@ MINGW_SDL2_TTF_DLL_DIR:=/usr/local/custom/mingw/SDL2_ttf/x86_64-w64-mingw32/bin
 
 .PHONY: BUILD_PONG BUILD_MINGW_PONG
 
+all: /tmp/pong.tar.gz /tmp/pong.zip
+
 /tmp/pong.tar.gz : build-release/pong
 	./package-tar.py
 
