@@ -14,7 +14,7 @@ ELSE()
 ENDIF()
 include_directories(${SDL2_INCLUDE_DIRS})
 
-find_package(SDL2_ttf)
+find_package(SDL2_ttf QUIET)
 IF (NOT SDL2_TTF_FOUND)
 	PKG_SEARCH_MODULE(SDL2_TTF REQUIRED SDL2_ttf)
 ENDIF()
