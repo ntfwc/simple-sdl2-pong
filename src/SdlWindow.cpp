@@ -1,4 +1,5 @@
 #include "SdlWindow.hpp"
+#include "stdio.h"
 
 bool SdlWindow::init(const char* title)
 {

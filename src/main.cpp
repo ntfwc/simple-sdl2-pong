@@ -78,7 +78,7 @@ void mainLoop(SDL_Renderer* renderer, TTF_Font* font)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	SdlSession session;
 	if (!session.init())
