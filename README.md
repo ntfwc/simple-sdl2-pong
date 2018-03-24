@@ -22,6 +22,8 @@ This is a cmake based project, you can build with the following:
 
 There are also some convenience scripts you should be able to use if you are on Linux.
 
+The project can also be built with mingw for Windows. If you are building from Linux, you can use the configure-mingw.sh script. You will probably have to change the script's paths to match where you have installed your copies of the mingw SDL2 libraries.
+
 # Running
 You must run the game with the "res" folder in your current directory. On Linux, if you used the above building steps, from the project directory, you can run it with:
 
