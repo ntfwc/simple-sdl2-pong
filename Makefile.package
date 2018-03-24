@@ -1,0 +1,27 @@
+MINGW_SDL2_DLL_DIR:=/usr/local/custom/mingw/SDL2/x86_64-w64-mingw32/bin
+MINGW_SDL2_TTF_DLL_DIR:=/usr/local/custom/mingw/SDL2_ttf/x86_64-w64-mingw32/bin
+
+.PHONY: BUILD_PONG BUILD_MINGW_PONG
+
+/tmp/pong.tar.gz : build-release/pong
+	tar --transform 's/build-release\///g' -czvf /tmp/pong.tar.gz res/ build-release/pong
+
+build-release/pong : BUILD_PONG
+
+BUILD_PONG :
+	[ -e build-release ] || ./configure-release.sh
+	cd build-release && ninja
+
+# MINGW
+/tmp/pong.zip : build-mingw/pong.exe
+	rm -f /tmp/pong.zip
+	zip -r /tmp/pong.zip res/
+	cd build-mingw && zip /tmp/pong.zip pong.exe
+	cd $(MINGW_SDL2_DLL_DIR) && zip /tmp/pong.zip SDL2.dll
+	cd $(MINGW_SDL2_TTF_DLL_DIR) && zip /tmp/pong.zip SDL2_ttf.dll
+
+build-mingw/pong.exe : BUILD_MINGW_PONG
+
+BUILD_MINGW_PONG :
+	[ -e build-mingw ] || ./configure-mingw.sh
+	cd build-mingw && ninja
