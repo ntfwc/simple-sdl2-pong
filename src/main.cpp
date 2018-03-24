@@ -71,7 +71,7 @@ void mainLoop(SDL_Renderer* renderer)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	SdlSession session;
 	if (!session.init())
