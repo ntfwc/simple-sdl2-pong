@@ -10,6 +10,7 @@
 #include "Score.hpp"
 
 const int TARGET_FPS = 60;
+const char* FONT_PATH = "res/ttf-bitstream-vera-1.10/VeraMono.ttf";
 
 void mainLoop(SDL_Renderer* renderer, TTF_Font* font)
 {
@@ -86,8 +87,11 @@ int main()
 	if (!window.init("Pong"))
 		return 2;
 	TTF_Font* font;
-	if ((font = TTF_OpenFont("res/ttf-bitstream-vera-1.10/VeraMono.ttf", 16)) == nullptr)
+	if ((font = TTF_OpenFont(FONT_PATH, 16)) == nullptr)
+	{
+		printf("Failed to open the font: '%s'\n", FONT_PATH);
 		return 3;
+	}
 	mainLoop(window.getRenderer(), font);
 	TTF_CloseFont(font);
 	return 0;
