@@ -28,3 +28,15 @@ The project can also be built with mingw for Windows. If you are building from L
 You must run the game with the "res" folder in your current directory. On Linux, if you used the above building steps, from the project directory, you can run it with:
 
 	build/pong
+
+# Controls
+
+Player 1:
+
+* w = move up
+* s = move down
+
+Player 2:
+
+* arrow up = move up
+* arrow down = move down
